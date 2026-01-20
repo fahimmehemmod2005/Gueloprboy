@@ -48,18 +48,20 @@ class _LoginScreenState extends State<LoginScreen> {
     print('Screen build');
     return Scaffold(
       body: SafeArea(
-        child: Form(
-          key: _formKey,
-          child: Consumer<LoginViewModel>(
-            builder: (context, provider, child) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Column(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Form(
+            key: _formKey,
+            child: Consumer<LoginViewModel>(
+              builder: (context, provider, child) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 72.0),
                     WidgetTitleSubtitle(
                       title: 'Welcome Back',
-                      subTitle: 'Log in to continue managing your properties, services, or investments.',
+                      subTitle:
+                          'Log in to continue managing your properties, services, or investments.',
                     ),
                     const SizedBox(height: 28.0),
                     InputField(
@@ -126,28 +128,27 @@ class _LoginScreenState extends State<LoginScreen> {
                           : Color(0xffD6D6D6),
                       onPressed: provider.isFormValid
                           ? () {
-                              if (_formKey.currentState!.validate()) {
-                              }
+                              if (_formKey.currentState!.validate()) {}
                             }
                           : null,
                     ),
-                    const Spacer(),
-                    CustomRichText(
-                      text1: "Don't have an account? ",
-                      text2: "Sign Up",
-                      text2Tap: () {
-                        Navigator.pushNamed(context, RouteName.signupScreen);
-                      },
+                    const SizedBox(height: 30.0),
+                    Center(
+                      child: CustomRichText(
+                        text1: "Don't have an account? ",
+                        text2: "Sign Up",
+                        text2Tap: () {
+                          Navigator.pushNamed(context, RouteName.signupScreen);
+                        },
+                      ),
                     ),
                   ],
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
       ),
     );
   }
 }
-
-

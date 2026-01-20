@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gueloprboy/app/routes/route_name.dart';
 import 'package:gueloprboy/app/widgets/custom_rich_text.dart';
-import 'package:gueloprboy/core/constant/app_color.dart';
 import 'package:gueloprboy/core/constant/app_images.dart';
 import 'package:gueloprboy/core/constant/app_text_styles.dart';
 import 'package:gueloprboy/features/onboarding/presentation/viewmodel/onboarding_view_model.dart';
@@ -17,10 +16,10 @@ class OnboardingScreen extends StatelessWidget {
       backgroundColor: const Color(0xff191D20),
       body: Stack(
         children: [
-          Image.asset(AppImages.onboarding),
+          Image.asset(AppImages.onboarding,height: double.infinity.h,width: double.infinity.r),
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Consumer<OnboardingViewModel>(
                 builder: (context, provider, child) {
                   return Column(
@@ -77,6 +76,7 @@ class OnboardingScreen extends StatelessWidget {
 
                       CustomRichText(
                         text1: 'Already have an account? ',
+                        style1: AppTextStyles.size14w400(color: Colors.white),
                         text2: 'Log In',
                         text2Tap: () {
                           Navigator.pushReplacementNamed(context, RouteName.loginScreen);

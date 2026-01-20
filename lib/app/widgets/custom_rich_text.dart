@@ -8,6 +8,10 @@ class CustomRichText extends StatelessWidget {
   final String? text2;
   final String? text3;
   final String? text4;
+  final TextStyle? style1;
+  final TextStyle? style2;
+  final TextStyle? style3;
+  final TextStyle? style4;
   final void Function()? text2Tap;
   final void Function()? text4Tap;
 
@@ -19,6 +23,10 @@ class CustomRichText extends StatelessWidget {
     this.text4,
     this.text2Tap,
     this.text4Tap,
+    this.style1,
+    this.style2,
+    this.style3,
+    this.style4,
   });
 
   @override
@@ -27,8 +35,8 @@ class CustomRichText extends StatelessWidget {
       text: TextSpan(
         children: [
           TextSpan(
-              text: text1,
-              style: AppTextStyles.size14w400(color: AppColor.subtitleColor)
+            text: text1,
+            style: style1 ?? AppTextStyles.size14w400(color: AppColor.subtitleColor),
           ),
           TextSpan(
             text: text2,
@@ -36,8 +44,8 @@ class CustomRichText extends StatelessWidget {
             recognizer: TapGestureRecognizer()..onTap = text2Tap,
           ),
           TextSpan(
-              text: text3,
-              style: AppTextStyles.size14w400(color: AppColor.subtitleColor),
+            text: text3,
+            style: AppTextStyles.size14w400(color: AppColor.subtitleColor),
           ),
           TextSpan(
             text: text4,

@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:gueloprboy/core/constant/app_color.dart';
-import 'package:gueloprboy/core/constant/app_text_styles.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:intl_phone_field/phone_number.dart';
 
-class InputField extends StatelessWidget {
+import '../../../../../core/constant/app_color.dart';
+import '../../../../../core/constant/app_text_styles.dart';
+
+class WidgetCountryPickerField extends StatelessWidget {
   final String hintText;
   final String label;
   final TextEditingController? controller;
-  final bool obscureText;
   final Widget? suffixIcon;
-  final String? Function(String?)? validator;
+  final String? Function(PhoneNumber?)? validator;
 
-  const InputField({
+  const WidgetCountryPickerField({
     super.key,
-    required this.label,
     required this.hintText,
+    required this.label,
     this.controller,
-    this.obscureText = false,
     this.suffixIcon,
     this.validator,
   });
@@ -25,18 +26,21 @@ class InputField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label,style: AppTextStyles.size14w500(color: AppColor.titleColor),),
+        Text(
+          label,
+          style: AppTextStyles.size14w500(color: AppColor.titleColor),
+        ),
         const SizedBox(height: 10),
-        TextFormField(
-          style: AppTextStyles.size14w400(color: AppColor.primaryTextColor),
+        IntlPhoneField(
+          initialCountryCode: 'BD',
+          showCountryFlag: false,
           cursorColor: Colors.black,
-          controller: controller,
-          obscureText: obscureText,
-          validator: validator,
+          style: AppTextStyles.size14w400(color: AppColor.primaryTextColor),
           autovalidateMode: AutovalidateMode.onUserInteraction,
+          controller: controller,
+          validator: validator,
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: AppTextStyles.size14w400(color: AppColor.grey),
             suffixIcon: suffixIcon,
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
@@ -56,7 +60,6 @@ class InputField extends StatelessWidget {
             ),
           ),
         ),
-
       ],
     );
   }

@@ -7,7 +7,8 @@ import '../../../../../core/constant/app_text_styles.dart';
 
 class WidgetHeader extends StatelessWidget {
   final String title;
-  const WidgetHeader({super.key, required this.title});
+  final double? width;
+  const WidgetHeader({super.key, required this.title, this.width});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class WidgetHeader extends StatelessWidget {
             width: 24.0.w,
           ),
         ),
-        const SizedBox(width: 103.0),
+         SizedBox(width: width),
         Text(
           title,
           style: AppTextStyles.size16w600(color: AppColor.primaryTextColor),

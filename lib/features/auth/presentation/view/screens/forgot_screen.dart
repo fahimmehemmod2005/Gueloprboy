@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gueloprboy/app/routes/route_name.dart';
 import 'package:gueloprboy/core/constant/app_color.dart';
-import 'package:gueloprboy/core/constant/app_images.dart';
-import 'package:gueloprboy/core/constant/app_text_styles.dart';
+import 'package:gueloprboy/features/auth/presentation/view/screens/verification_screen.dart';
 import 'package:gueloprboy/features/auth/presentation/view/widgets/widget_title_subtitle.dart';
 import 'package:gueloprboy/features/auth/presentation/viewmodel/forgot_view_model.dart';
 import 'package:provider/provider.dart';
@@ -30,8 +27,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
   }
 
   void _onChanged() {
-    context.read<ForgotViewModel>()
-        .validateForm(_emailController.text);
+    context.read<ForgotViewModel>().validateForm(_emailController.text);
   }
 
   @override
@@ -45,7 +41,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Consumer<ForgotViewModel>(
             builder: (context, provider, child) {
@@ -54,9 +50,8 @@ class _ForgotScreenState extends State<ForgotScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     const SizedBox(height: 16),
-                    WidgetHeader(title: 'Forgot Password'),
+                    WidgetHeader(title: 'Forgot Password', width: 105.0),
                     const SizedBox(height: 16),
                     WidgetTitleSubtitle(
                       title: 'Forgot Password',
@@ -71,7 +66,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                       validator: provider.validateEmail,
                     ),
 
-                    const Spacer(),
+                    const SizedBox(height: 50.0),
 
                     PrimaryButton(
                       label: 'Continue',
@@ -80,10 +75,19 @@ class _ForgotScreenState extends State<ForgotScreen> {
                           : Color(0xffD6D6D6),
                       onPressed: provider.isFormValid
                           ? () {
-                        if (_formKey.currentState!.validate()) {
-                          Navigator.pushNamed(context, RouteName.verificationScreen);
-                        }
-                      }
+                              if (_formKey.currentState!.validate()) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (builder) =>
+                                        VerificationScreen(
+                                      email: _emailController.text.trim(),
+                                          form: 'forgotScreen',
+                                    ),
+                                  ),
+                                );
+                              }
+                            }
                           : null,
                     ),
                   ],
@@ -96,4 +100,3 @@ class _ForgotScreenState extends State<ForgotScreen> {
     );
   }
 }
-
