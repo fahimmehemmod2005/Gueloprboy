@@ -5,7 +5,8 @@ import '../../../../../core/constant/app_images.dart';
 import '../../../../../core/constant/app_text_styles.dart';
 
 class SearchInputField extends StatelessWidget {
-  const SearchInputField({super.key});
+  final void Function()? onTap;
+  const SearchInputField({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,10 @@ class SearchInputField extends StatelessWidget {
       style: AppTextStyles.size14w400(color: Colors.black),
       decoration: InputDecoration(
         prefixIcon: Image.asset(AppImages.search),
-        suffixIcon: Image.asset(AppImages.filter),
+        suffixIcon: GestureDetector(
+          onTap: onTap,
+            child: Image.asset(AppImages.filter),
+        ),
         filled: true,
         fillColor: Colors.white,
         hintText: 'Search here...',

@@ -3,13 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gueloprboy/core/constant/app_color.dart';
 import 'package:gueloprboy/core/constant/app_images.dart';
 import 'package:gueloprboy/core/constant/app_text_styles.dart';
-import 'package:gueloprboy/features/home/presentation/view/screens/plots_screens.dart';
-import 'package:gueloprboy/features/home/presentation/view/screens/rent_screen.dart';
-import 'package:gueloprboy/features/home/presentation/view/screens/repair_screen.dart';
-import 'package:gueloprboy/features/home/presentation/viewmodel/main_view_model.dart';
+import 'package:gueloprboy/features/plots/presentation/view/screens/plots_screens.dart';
+import 'package:gueloprboy/features/rent/presentation/view/screens/rent_screen.dart';
+import 'package:gueloprboy/features/repair/presentation/view/screens/repair_screen.dart';
+import 'package:gueloprboy/features/main/viewmodel/main_view_model.dart';
 import 'package:provider/provider.dart';
-import 'chat_screen.dart';
-import 'home_screen.dart';
+import '../../chat/presentation/view/screens/chat_screen.dart';
+import '../../home/presentation/view/screens/home_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});

@@ -80,8 +80,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (builder) =>
-                                        VerificationScreen(
-                                      email: _emailController.text.trim(),
+                                        VerificationScreen(email: _emailController.text.trim(),
                                           form: 'forgotScreen',
                                     ),
                                   ),

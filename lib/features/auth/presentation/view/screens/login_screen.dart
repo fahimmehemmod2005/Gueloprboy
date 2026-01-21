@@ -128,7 +128,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           : Color(0xffD6D6D6),
                       onPressed: provider.isFormValid
                           ? () {
-                              if (_formKey.currentState!.validate()) {}
+                              if (_formKey.currentState!.validate()) {
+                                Navigator.pushReplacementNamed(context, RouteName.mainScreen);
+                              }
                             }
                           : null,
                     ),
