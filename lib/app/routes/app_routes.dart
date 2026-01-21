@@ -40,7 +40,7 @@ class AppRoutes {
 
     // home screens
     RouteName.mainScreen: (context) =>  const MainScreen(),
-    RouteName.homeScreen: (context) =>  const HomeScreen(),
+    RouteName.homeScreen: (context) =>  HomeScreen(),
     RouteName.repairScreen: (context) =>  const RepairScreen(),
     RouteName.rentScreen: (context) =>  const RentScreen(),
     RouteName.plotsScreen: (context) =>  const PlotsScreens(),

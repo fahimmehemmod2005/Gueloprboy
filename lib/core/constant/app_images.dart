@@ -10,6 +10,11 @@ class AppImages {
   static const String downArrow = 'assets/icons/down_arrow.png';
   static const String search = 'assets/icons/search.png';
   static const String filter = 'assets/icons/filter.png';
+  static const String bathtub = 'assets/icons/bathtub.png';
+  static const String bed = 'assets/icons/bed.png';
+  static const String fitTo = 'assets/icons/fit_to.png';
+  static const String house = 'assets/icons/house.png';
+  static const String floor = 'assets/icons/floor.png';
 
   // bottom navigation icons
   static const String home = 'assets/icons/home.png';
@@ -21,4 +26,9 @@ class AppImages {
   // images
   static const String backImage = 'assets/images/back_image.png';
   static const String profile = 'assets/images/profile.png';
+  static const String house1 = 'assets/images/house1.png';
+  static const String house2 = 'assets/images/house2.png';
+  static const String house3 = 'assets/images/house3.png';
+  static const String house4 = 'assets/images/house4.png';
+  static const String forRent = 'assets/images/for_rent.png';
 }
