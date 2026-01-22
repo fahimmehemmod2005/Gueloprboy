@@ -5,7 +5,8 @@ import '../../../../../core/constant/app_images.dart';
 import '../../../../../core/constant/app_text_styles.dart';
 
 class ProfileListTile extends StatelessWidget {
-  const ProfileListTile({super.key});
+  final void Function()? notificationTap;
+  const ProfileListTile({super.key, this.notificationTap});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class ProfileListTile extends StatelessWidget {
         ],
       ),
       trailing: IconButton(
-        onPressed: () {},
+        onPressed: notificationTap,
         icon: Image.asset(AppImages.notification),
       ),
     );

@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../app/widgets/custom_text_field.dart';
 import '../../../../../app/widgets/primary_button.dart';
-import '../widgets/widget_header.dart';
+import '../../../../../app/widgets/widget_header.dart';
 
 class ForgotScreen extends StatefulWidget {
   const ForgotScreen({super.key});
@@ -51,7 +51,10 @@ class _ForgotScreenState extends State<ForgotScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 16),
-                    WidgetHeader(title: 'Forgot Password', width: 105.0),
+                    WidgetHeader(
+                        title: 'Forgot Password',
+                        width: 105.0,
+                    ),
                     const SizedBox(height: 16),
                     WidgetTitleSubtitle(
                       title: 'Forgot Password',

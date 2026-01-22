@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gueloprboy/core/constant/app_color.dart';
+import 'package:gueloprboy/app/routes/route_name.dart';
 import 'package:gueloprboy/core/constant/app_images.dart';
 import 'package:gueloprboy/core/constant/app_size_box.dart';
-import 'package:gueloprboy/core/constant/app_text_styles.dart';
 import 'package:gueloprboy/features/home/presentation/view/widgets/for_rent_house_details.dart';
 import '../widgets/house_details.dart';
 import '../widgets/profile_list_tile.dart';
@@ -41,7 +40,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppSizeBox.height20,
-                    ProfileListTile(),
+                    ProfileListTile(
+                      notificationTap: (){
+                        Navigator.pushNamed(context, RouteName.notificationScreen);
+                      },
+                    ),
                     AppSizeBox.height10,
                     SearchInputField(
                       onTap: () {
@@ -75,7 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     TitleBar(
                       title: 'Feature Listing',
                       subTitle: 'See all',
-                      textColor: Colors.black,
+                      textColor1: Colors.black,
+                      textColor2: Colors.black,
                       onTap: () {},
                     ),
                     AppSizeBox.height5,

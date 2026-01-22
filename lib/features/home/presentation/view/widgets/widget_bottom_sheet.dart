@@ -1,45 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gueloprboy/app/widgets/primary_button.dart';
+import 'package:gueloprboy/features/home/presentation/viewmodel/filter_button_view_model.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../../app/widgets/primary_button.dart';
 import '../../../../../core/constant/app_color.dart';
 import '../../../../../core/constant/app_size_box.dart';
 import '../../../../../core/constant/app_text_styles.dart';
 
-class WidgetBottomSheet extends StatefulWidget {
+class WidgetBottomSheet extends StatelessWidget {
   const WidgetBottomSheet({super.key});
 
   @override
-  State<WidgetBottomSheet> createState() => _WidgetBottomSheetState();
-}
-
-class _WidgetBottomSheetState extends State<WidgetBottomSheet> {
-  // range slider
-  final double _minPrice = 400;
-  final double _maxPrice = 40000;
-  RangeValues _priceRange = const RangeValues(600, 800);
-
-  // chip
-  String? _selectedSize;
-  final _sizes = ['950 sq ft', '1350 sq ft', '1400 sq ft', '1600 sq ft'];
-
-  // bedrooms and bathrooms
-  final _selectedBedrooms = [2];
-  final _selectedBathrooms = [1];
-
-  // checkbox list tile
-  final _amenities = ['Parking', 'Gym', 'CCTV', 'Balcony'];
-  bool _parking = false;
-  bool _gym = false;
-  bool _cctv = false;
-  bool _balcony = false;
-
-  @override
   Widget build(BuildContext context) {
+    final filter = context.watch<FilterButtonViewModel>();
+
     return SafeArea(
       top: false,
       child: Container(
-        height: 730, // responsive height
+        height: 800,
         width: double.infinity,
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -56,42 +34,36 @@ class _WidgetBottomSheetState extends State<WidgetBottomSheet> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Filter',
-                    style: AppTextStyles.size16w600(color: AppColor.titleColor),
-                  ),
+                  Text('Filter',
+                      style: AppTextStyles.size16w600(
+                          color: AppColor.titleColor)),
                   const CloseButton(),
                 ],
               ),
 
-              AppSizeBox.height10,
-
               /// title
-              Text(
-                'Rent Price Range',
-                style: AppTextStyles.size16w500(color: AppColor.titleColor),
-              ),
+              Text('Rent Price Range',
+                  style: AppTextStyles.size16w500(
+                      color: AppColor.titleColor)),
 
               AppSizeBox.height10,
 
-              /// dynamic range text
               Text(
                 'Min \$400 - Max \$40000',
                 style: AppTextStyles.size14w500(color: AppColor.iconColor),
               ),
 
               AppSizeBox.height10,
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Min Rent',
-                    style: AppTextStyles.size14w500(color: AppColor.iconColor),
-                  ),
-                  Text(
-                    'Max Rent',
-                    style: AppTextStyles.size14w500(color: AppColor.iconColor),
-                  ),
+                  Text('Min Rent',
+                      style: AppTextStyles.size14w500(
+                          color: AppColor.iconColor)),
+                  Text('Max Rent',
+                      style: AppTextStyles.size14w500(
+                          color: AppColor.iconColor)),
                 ],
               ),
 
@@ -99,222 +71,166 @@ class _WidgetBottomSheetState extends State<WidgetBottomSheet> {
               RangeSlider(
                 activeColor: AppColor.primaryColor,
                 inactiveColor: AppColor.borderColor,
-                min: _minPrice,
-                max: _maxPrice,
-                values: _priceRange,
+                min: filter.minPrice,
+                max: filter.maxPrice,
+                values: filter.priceRange,
                 divisions: 100,
                 labels: RangeLabels(
-                  '\$${_priceRange.start.round()}',
-                  '\$${_priceRange.end.round()}',
+                  '\$${filter.priceRange.start.round()}',
+                  '\$${filter.priceRange.end.round()}',
                 ),
-                onChanged: (RangeValues value) {
-                  setState(() {
-                    _priceRange = value;
-                  });
-                },
+                onChanged: filter.updatePrice,
               ),
+
               AppSizeBox.height5,
               Divider(color: AppColor.borderColor),
               AppSizeBox.height5,
-              Text(
-                'Property size',
-                style: AppTextStyles.size16w500(color: AppColor.titleColor),
-              ),
+
+              /// size
+              Text('Property size',
+                  style: AppTextStyles.size16w500(
+                      color: AppColor.titleColor)),
+
               AppSizeBox.height10,
+
               Wrap(
                 spacing: 15,
-                children: _sizes.map((size) {
-                  final selected = _selectedSize == size;
+                children: filter.sizes.map((size) {
+                  final selected = filter.selectedSize == size;
                   return ChoiceChip(
-                    label: Text(
-                      size,
-                      style: AppTextStyles.size14w500(
-                        color: selected ? Colors.white : Colors.black,
-                      ),
-                    ),
+                    label: Text(size,
+                        style: AppTextStyles.size14w500(
+                            color:
+                            selected ? Colors.white : Colors.black)),
                     selected: selected,
-                    onSelected: (bool value) {
-                      setState(() {
-                        _selectedSize = value ? size : null;
-                      });
-                    },
+                    onSelected: (v) =>
+                        filter.selectSize(v ? size : null),
                     selectedColor: AppColor.primaryColor,
                     backgroundColor: Colors.white,
                   );
                 }).toList(),
               ),
+
               AppSizeBox.height10,
-              Text(
-                'Bed Room',
-                style: AppTextStyles.size16w500(color: AppColor.titleColor),
-              ),
+
+              /// bedroom
+              Text('Bed Room',
+                  style: AppTextStyles.size16w500(
+                      color: AppColor.titleColor)),
+
               AppSizeBox.height10,
+
               Wrap(
                 spacing: 15,
                 children: [1, 2, 3, 4].map((num) {
-                  final selected = _selectedBedrooms.contains(num);
+                  final selected =
+                  filter.selectedBedrooms.contains(num);
                   return FilterChip(
                     backgroundColor: Colors.white,
                     selectedColor: AppColor.primaryColor,
-                    label: Text(
-                      '$num',
-                      style: AppTextStyles.size14w500(
-                        color: selected ? Colors.white : Colors.black,
-                      ),
-                    ),
+                    label: Text('$num',
+                        style: AppTextStyles.size14w500(
+                            color:
+                            selected ? Colors.white : Colors.black)),
                     selected: selected,
-                    onSelected: (bool value) {
-                      setState(() {
-                        if (value) {
-                          _selectedBedrooms.add(num);
-                        } else {
-                          _selectedBedrooms.remove(num);
-                        }
-                      });
-                    },
+                    onSelected: (_) => filter.toggleBedroom(num),
                   );
                 }).toList(),
               ),
+
               AppSizeBox.height10,
-              Text(
-                'Bath Room',
-                style: AppTextStyles.size16w500(color: AppColor.titleColor),
-              ),
+
+              /// bathroom
+              Text('Bath Room',
+                  style: AppTextStyles.size16w500(
+                      color: AppColor.titleColor)),
+
               AppSizeBox.height10,
+
               Wrap(
-                runSpacing: 10,
                 spacing: 15,
                 children: [1, 2, 3, 4].map((num) {
-                  final selected = _selectedBathrooms.contains(num);
+                  final selected =
+                  filter.selectedBathrooms.contains(num);
                   return FilterChip(
                     backgroundColor: Colors.white,
                     selectedColor: AppColor.primaryColor,
-                    label: Text(
-                      '$num',
-                      style: AppTextStyles.size14w500(
-                        color: selected ? Colors.white : Colors.black,
-                      ),
-                    ),
+                    label: Text('$num',
+                        style: AppTextStyles.size14w500(
+                            color:
+                            selected ? Colors.white : Colors.black)),
                     selected: selected,
-                    onSelected: (bool value) {
-                      setState(() {
-                        if (value) {
-                          _selectedBathrooms.add(num);
-                        } else {
-                          _selectedBathrooms.remove(num);
-                        }
-                      });
-                    },
+                    onSelected: (_) => filter.toggleBathroom(num),
                   );
                 }).toList(),
               ),
+
               AppSizeBox.height5,
               Divider(color: AppColor.borderColor),
               AppSizeBox.height5,
-              Text(
-                'Amenities',
-                style: AppTextStyles.size16w500(color: AppColor.titleColor),
-              ),
+
+              /// amenities
+              Text('Amenities',
+                  style: AppTextStyles.size16w500(
+                      color: AppColor.titleColor)),
+
               AppSizeBox.height10,
-              Wrap(
-                spacing: 10,
-                children: [
-                  SizedBox(
-                    height: 24,
-                    width: 120,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Checkbox(
-                          checkColor: Colors.white,
-                          activeColor: AppColor.primaryColor,
-                          value: _parking,
-                          onChanged: (value) {
-                            setState(() {
-                              _parking = value!;
-                            });
-                          },
-                        ),
-                        AppSizeBox.width5,
-                        Text(_amenities[0]),
-                      ],
-                    ),
+              Row(
+                    children: [
+                      Checkbox(
+                        value: filter.parking,
+                        onChanged: (v) => filter.setParking(v!),
+                        activeColor: AppColor.primaryColor,
+                      ),
+                      Text('Parking'),
+                    ],
                   ),
-                  SizedBox(
-                    height: 24,
-                    width: 120,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Checkbox(
-                          checkColor: Colors.white,
-                          activeColor: AppColor.primaryColor,
-                          value: _gym,
-                          onChanged: (value) {
-                            setState(() {
-                              _gym = value!;
-                            });
-                          },
-                        ),
-                        AppSizeBox.width5,
-                        Text(_amenities[1]),
-                      ],
-                    ),
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: filter.gym,
+                        onChanged: (v) => filter.setGym(v!),
+                        activeColor: AppColor.primaryColor,
+                      ),
+                      Text('Gym access'),
+                    ],
                   ),
-                  SizedBox(
-                    height: 24,
-                    width: 120,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Checkbox(
-                          checkColor: Colors.white,
-                          activeColor: AppColor.primaryColor,
-                          value: _cctv,
-                          onChanged: (value) {
-                            setState(() {
-                              _cctv = value!;
-                            });
-                          },
-                        ),
-                        AppSizeBox.width5,
-                        Text(_amenities[2]),
-                      ],
-                    ),
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: filter.cctv,
+                        onChanged: (v) => filter.setCctv(v!),
+                        activeColor: AppColor.primaryColor,
+                      ),
+                      Text('CCTV'),
+                    ],
                   ),
-                  SizedBox(
-                    height: 24,
-                    width: 120,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Checkbox(
-                          checkColor: Colors.white,
-                          activeColor: AppColor.primaryColor,
-                          value: _balcony,
-                          onChanged: (value) {
-                            setState(() {
-                              _balcony = value!;
-                            });
-                          },
-                        ),
-                        AppSizeBox.width5,
-                        Text(_amenities[3]),
-                      ],
-                    ),
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: filter.balcony,
+                        onChanged: (v) => filter.setBalcony(v!),
+                        activeColor: AppColor.primaryColor,
+                      ),
+                      Text('Balcony'),
+                    ],
                   ),
-                ],
-              ),
-              AppSizeBox.height20,
               Row(
                 children: [
-                  Expanded(child: PrimaryButton(label: 'Clear',onPressed: (){},)),
+                  Expanded(
+                    child: PrimaryButton(
+                      label: 'Clear',
+                      onPressed: filter.clearAll,
+                    ),
+                  ),
                   AppSizeBox.width20,
-                  Expanded(child: PrimaryButton(
-                    label: 'Apply',
-                    backgroundColor: AppColor.primaryColor,
-                    onPressed: (){},
-                  )),
+                  Expanded(
+                    child: PrimaryButton(
+                      label: 'Apply',
+                      backgroundColor: AppColor.primaryColor,
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -324,3 +240,5 @@ class _WidgetBottomSheetState extends State<WidgetBottomSheet> {
     );
   }
 }
+
+

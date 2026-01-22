@@ -15,6 +15,8 @@ class AppImages {
   static const String fitTo = 'assets/icons/fit_to.png';
   static const String house = 'assets/icons/house.png';
   static const String floor = 'assets/icons/floor.png';
+  static const String notification2 = 'assets/icons/notification2.png';
+  static const String wallet = 'assets/icons/wallet.png';
 
   // bottom navigation icons
   static const String home = 'assets/icons/home.png';
@@ -31,4 +33,9 @@ class AppImages {
   static const String house3 = 'assets/images/house3.png';
   static const String house4 = 'assets/images/house4.png';
   static const String forRent = 'assets/images/for_rent.png';
+  static const String repair1 = 'assets/images/repair1.png';
+  static const String repair2 = 'assets/images/repair2.png';
+  static const String repair3 = 'assets/images/repair3.png';
+  static const String repair4 = 'assets/images/repair4.png';
+  static const String repair5 = 'assets/images/repair5.png';
 }

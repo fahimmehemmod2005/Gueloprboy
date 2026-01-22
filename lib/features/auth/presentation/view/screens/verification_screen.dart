@@ -4,7 +4,7 @@ import 'package:gueloprboy/app/widgets/primary_button.dart';
 import 'package:gueloprboy/core/constant/app_color.dart';
 import 'package:gueloprboy/core/constant/app_text_styles.dart';
 import 'package:gueloprboy/features/auth/presentation/view/widgets/resend_button.dart';
-import 'package:gueloprboy/features/auth/presentation/view/widgets/widget_header.dart';
+import 'package:gueloprboy/app/widgets/widget_header.dart';
 import 'package:gueloprboy/features/auth/presentation/view/widgets/widget_title_subtitle.dart';
 import 'package:gueloprboy/features/auth/presentation/viewmodel/verificaiton_view_model.dart';
 import 'package:pinput/pinput.dart';
@@ -13,7 +13,11 @@ import 'package:provider/provider.dart';
 class VerificationScreen extends StatefulWidget {
   final String email;
   final String form;
-  const VerificationScreen({super.key, required this.email, required this.form});
+  const VerificationScreen({
+    super.key,
+    required this.email,
+    required this.form,
+  });
 
   @override
   State<VerificationScreen> createState() => _VerificationScreenState();
@@ -60,7 +64,10 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 16.0),
-                    WidgetHeader(title: 'Verification', width: 125.0),
+                    WidgetHeader(
+                      title: 'Verification',
+                      width: 125.0,
+                    ),
                     const SizedBox(height: 16),
 
                     WidgetTitleSubtitle(
@@ -103,10 +110,16 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       onPressed: provider.isOtpValid
                           ? () {
                               if (_formKey.currentState!.validate()) {
-                                if( widget.form == 'forgotScreen'){
-                                Navigator.pushNamed(context, RouteName.resetPasswordScreen);
-                                }else if(widget.form == 'signupScreen'){
-                                  Navigator.pushReplacementNamed(context, RouteName.loginScreen);
+                                if (widget.form == 'forgotScreen') {
+                                  Navigator.pushNamed(
+                                    context,
+                                    RouteName.resetPasswordScreen,
+                                  );
+                                } else if (widget.form == 'signupScreen') {
+                                  Navigator.pushReplacementNamed(
+                                    context,
+                                    RouteName.loginScreen,
+                                  );
                                 }
                               }
                             }

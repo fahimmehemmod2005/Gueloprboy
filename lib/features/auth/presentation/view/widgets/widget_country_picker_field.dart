@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
-
 import '../../../../../core/constant/app_color.dart';
 import '../../../../../core/constant/app_text_styles.dart';
 

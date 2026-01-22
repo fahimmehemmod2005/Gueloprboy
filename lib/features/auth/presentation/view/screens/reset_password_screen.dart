@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gueloprboy/app/routes/route_name.dart';
 import 'package:gueloprboy/app/widgets/custom_text_field.dart';
-import 'package:gueloprboy/features/auth/presentation/view/widgets/widget_header.dart';
+import 'package:gueloprboy/app/widgets/widget_header.dart';
 import 'package:gueloprboy/features/auth/presentation/view/widgets/widget_title_subtitle.dart';
 import 'package:gueloprboy/features/auth/presentation/viewmodel/reset_password_view_model.dart';
 import 'package:provider/provider.dart';
@@ -59,7 +59,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 16.0),
-                    WidgetHeader(title: 'Reset Password', width: 110),
+                    WidgetHeader(
+                      title: 'Reset Password',
+                      width: 110,
+                    ),
                     const SizedBox(height: 16.0),
                     WidgetTitleSubtitle(
                       title: 'Set a new Password',
@@ -114,7 +117,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       onPressed: provider.isFormValid
                           ? () {
                               if (_formKey.currentState!.validate()) {
-                                Navigator.pushNamed(context, RouteName.successfulMessageScreen);
+                                Navigator.pushNamed(
+                                  context,
+                                  RouteName.successfulMessageScreen,
+                                );
                               }
                             }
                           : null,
