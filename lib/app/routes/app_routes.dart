@@ -20,7 +20,7 @@ import 'route_name.dart';
 class AppRoutes {
 
   // initialRoute
-  static const String initialRoute = RouteName.mainScreen;
+  static const String initialRoute = RouteName.splashScreen;
 
   static final Map<String, WidgetBuilder> routes = {
 
